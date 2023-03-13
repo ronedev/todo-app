@@ -1,18 +1,25 @@
-import React from 'react'
-import './App.css'
-import { TodoContext } from './context/tasksContext'
+import React from "react";
+import "./App.css";
+import { TodoContext } from "./context/tasksContext";
 
 function App() {
-  const todos = React.useContext(TodoContext)
-  console.log(todos)
+  const todosContext = React.useContext(TodoContext);
+  console.log(todosContext);
   return (
     <div className="App">
-      <h2>Todo list</h2>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+        <h2>Todo list</h2>
+        <button>Add task</button>
+      </div>
       <ul>
-        <li></li>
+        {todosContext?.todos.length ? (
+          todosContext.todos.map((todo) => <li>{todo.title}</li>)
+        ) : (
+          <p style={{ color: "black" }}>No posee tareas</p>
+        )}
       </ul>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
