@@ -1,13 +1,15 @@
 import React from "react";
 import "./App.css";
 import AddModal from "./components/AddModal";
-import { TodoContext } from "./context/tasksContext";
+import { Todos } from "./components/Todos";
+import { withSearch } from "./components/WithSearch";
 import useModal from "./hook/useModal";
 
 function App() {
-  const todosContext = React.useContext(TodoContext);
+  
   const {isOpened, toggle} = useModal()
-  console.log(todosContext);
+
+  const TodosWithSearch = withSearch(Todos)
   return (
     <div className="App">
       {isOpened && <AddModal />}
@@ -15,13 +17,7 @@ function App() {
         <h2>Todo list</h2>
         <button onClick={toggle}>Add task</button>
       </div>
-      <ul>
-        {todosContext?.todos.length ? (
-          todosContext.todos.map((todo) => <li>{todo.title}</li>)
-        ) : (
-          <p style={{ color: "black" }}>No posee tareas</p>
-        )}
-      </ul>
+      <TodosWithSearch />
     </div>
   );
 }
