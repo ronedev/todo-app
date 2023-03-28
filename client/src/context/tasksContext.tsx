@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const TodoContext = React.createContext<TodoContextType | null>(null);
+export const TodoContext = React.createContext<TodoContextType | {todos: []}>({todos: []});
 
 const TodoProvider: React.FC<Props> = ({ children }) => {
     const [todos, setTodos] = useLocalStorage('tasks', [])

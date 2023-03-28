@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export function withSearch(Component: React.ComponentType){
+interface ComponentI{
+    data: []
+}
+
+export function withSearch(Component: React.ComponentType<ComponentI>, dataset: any){
     return function(){
         const [query, setQuery] = useState("")
 
@@ -11,7 +15,7 @@ export function withSearch(Component: React.ComponentType){
         return(
             <div>
                 <input type="text" onChange={handleChange} value={query} />
-                <Component /> 
+                <Component data={dataset}/> 
             </div>
         )
     }
